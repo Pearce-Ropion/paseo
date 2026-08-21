@@ -77,6 +77,7 @@ import { legacyFavoriteProfileMigration } from "@/agent-profiles/migration";
 import { listenToDesktopEvent } from "@/desktop/electron/events";
 import { updateDesktopWindowControls } from "@/desktop/electron/window";
 import { getDesktopHost } from "@/desktop/host";
+import { useKeepAwake } from "@/desktop/hooks/use-keep-awake";
 import { loadDesktopSettings } from "@/desktop/settings/desktop-settings";
 import { RosettaCalloutSource } from "@/desktop/updates/rosetta-callout-source";
 import { UpdateCalloutSource } from "@/desktop/updates/update-callout-source";
@@ -687,6 +688,7 @@ function ProvidersWrapper({ children }: { children: ReactNode }) {
       <OfferLinkListener upsertDaemonFromOfferUrl={upsertConnectionFromOfferUrl} />
       <HostSessionManager />
       <FaviconStatusSync />
+      <KeepAwakeSync />
       <AppearanceStyleBoundary>{children}</AppearanceStyleBoundary>
     </VoiceProvider>
   );
@@ -891,6 +893,11 @@ function AppWithSidebar({ children }: { children: ReactNode }) {
 
 function FaviconStatusSync() {
   useFaviconStatus();
+  return null;
+}
+
+function KeepAwakeSync() {
+  useKeepAwake();
   return null;
 }
 
